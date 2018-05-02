@@ -1,0 +1,28 @@
+<div class="job-list" id="<%= book.id %>" style="width: 100%">
+  <div class="col-sm-2">
+    <div class="thumb">
+      <a href="#"><%= image_tag book.image.url, width: "200", height: "150" if book.image?  %></a>
+    </div>
+  </div>
+  <div class="col-sm-8">
+  <div style="word-wrap: break-word;">
+    <h4>
+      <a href="<%= book_path(book.id) %>"><%= book.name %></a>
+      <span class="Applying"><%= book.average_point unless book.average_point.nil? %>  <i class="fa fa-star"></i></span>
+    </h4>
+    <p><%= book.description[0..100] + "...." %></p>
+    <div class="job-tag request">
+      <div class="pull-left">
+        <div class="meta-tag">
+          <span><i class="ti-location-pin"></i><%= book.category.name %></span>
+        </div>
+      </div>
+      <div class="pull-right">
+        <a href="<%= book_path(book.id) %>" class="btn btn-common btn-rm">
+          Detail
+        </a>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

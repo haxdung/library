@@ -1,0 +1,28 @@
+<table id="books" class="display nowrap" style="width:100%">
+  <thead>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Role</th>
+  <th>Edit</th>
+  <th>Delete</th>
+  </thead>
+  <tbody>
+  <%= render partial: "users/user",
+             collection: @users %>
+  </tbody>
+</table>
+<script>
+    $(document).ready(function() {
+      $('#books').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+          {
+            extend: 'excelHtml5',
+            exportOptions: {
+                columns: [0, 1, 2]
+            }
+          }
+        ]
+      });
+    } );
+</script>

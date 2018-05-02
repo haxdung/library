@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Create book: </h1>
+  <%= form_for @book do |f| %>
+    <div class="form-group">
+      <label for="example-text-input" class="col-2 col-form-label">Name: </label>
+      <%= f.text_field :name, class: "form-control"%>
+    </div>
+    <div class="form-group">
+      <label for="example-text-input" class="col-2 col-form-label">Description: </label>
+      <%= f.text_area :description, class: "form-control"%>
+    </div>
+    <div class="form-group">
+      <label for="example-text-input" class="col-2 col-form-label">Category: </label>
+      <%= select "book", "category_id", @categories.collect { |p| [p.name, p.id] }, { prompt: 'Select category' },
+                 class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <label for="example-text-input" class="col-2 col-form-label">Author: </label>
+      <%= select "book", "author_id", @authors.collect { |p| [p.name, p.id] }, { prompt: 'Select author' },
+                 class: "form-control" %>
+    </div>
+    <div class="fileinput fileinput-new" data-provides="fileinput">
+      <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+      <div>
+        <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
+          <%= f.file_field :image %></span>
+        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+      </div>
+    </div><br>
+    <%= f.submit "Done", class: "btn btn-success" %>
+  <% end %>
+</div>

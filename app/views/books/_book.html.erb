@@ -1,0 +1,15 @@
+<tr id = "<%= book.id %>">
+  <td><%= book.name %></td>
+  <td><%= book.category.name if book.category.present? %></td>
+  <td><%= book.author.name if book.author.present? %></td>
+  <td>
+    <%= link_to edit_admin_book_url(book.id)   do %>
+      <i class="fa fa-pencil fa-1x"></i>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to book, method: :delete, data: {confirm: "Are you sure? "} do %>
+      <i class="fa fa-trash fa-1x"></i>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,22 @@
+en:
+  date_format: "%d/%m/%Y"
+  time:
+    formats:
+      date_month_year_concise: '%d-%m-%Y'
+  views:
+    layouts:
+      search_form:
+        placeholder1: "Find user...."
+        placeholder2: "Find request..."
+        submit: "Search"
+      header:
+        signin: "Sign in"
+        signout: "Sign out"
+        profile: "Profile"
+        notification: "Notification"
+        vi: "Vietnamese"
+        en: "English"
+        language: "Language"
+        create_request: "Create request"
+        view_request: "View my requests"
+        redirect_to: "Move"

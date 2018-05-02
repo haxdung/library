@@ -1,0 +1,26 @@
+<table id="categories" class="display nowrap" style="width:100%">
+  <thead>
+  <th>Name</th>
+  <th>Edit</th>
+  <th>Delete</th>
+  </thead>
+  <tbody>
+  <%= render partial: "categories/category",
+             collection: @categories %>
+  </tbody>
+</table>
+<script>
+  $(document).ready(function() {
+    $('#categories').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+          {
+              extend: 'excelHtml5',
+              exportOptions: {
+                  columns: [0]
+              }
+          }
+      ]
+    });
+  } );
+</script>

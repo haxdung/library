@@ -1,0 +1,94 @@
+<section class="find-job section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" id="books-<%= @book.id %>">
+        <div class="job-list" style="width: 100%">
+          <div class="col-sm-4">
+            <div class="thumb">
+              <a href="#"><%= image_tag @book.image.url, width: "300", height: "600" if @book.image?  %></a>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div style="word-wrap: break-word;">
+              <h2><%= @book.name %></a><span class="Applying"><span id="avg_point">
+                <%= @book.average_point unless @book.average_point.nil? %></span> <i class="fa fa-star"></i></span></h2>
+              <p><%= @book.description %></p>
+              <div id="star-rating" style="padding-top: 50%">
+                <fieldset class="rating">
+                  <input type="radio" id="star5" name="rating" value="5" class="stars"/><label class = "full" for="star5" title="Awesome"></label>
+                  <input type="radio" id="star4" name="rating" value="4" class="stars"/><label class = "full" for="star4" title="Good"></label>
+                  <input type="radio" id="star3" name="rating" value="3" class="stars"/><label class = "full" for="star3" title="Not bad"></label>
+                  <input type="radio" id="star2" name="rating" value="2" class="stars"/><label class = "full" for="star2" title="Bad"></label>
+                  <input type="radio" id="star1" name="rating" value="1" class="stars"/><label class = "full" for="star1" title="Very bad"></label>
+                </fieldset>
+              </div>
+              <br>
+              <br>
+              <div class="job-tag request">
+                <div class="pull-left">
+                  <div class="meta-tag">
+                    <span><span id="like_count"> <%= @book.likes.count  %></span><i class="fa fa-heart" style="color: red"></i></span>
+                    <br>
+                    <span>author: <a href="#"><i class="ti-brush"></i><%= @book.author.name %></a></span>
+                  </div>
+                </div>
+                <p class="hidden" id="book_id" ><%= @book.id %></p>
+                <p class="hidden" id="book_id" ><%= @book.average_point %></p>
+                <p class="hidden" id="rate" ><%= rated @book.id %></p>
+                <div id = "react" >
+                <% if liked @book.id %>
+                    <div class="pull-right" id="unlike" >
+                      <div class="icon">
+                        <i class="fa fa-heart"></i>
+                      </div>
+                    </div>
+                <% else %>
+                    <div class="pull-right" id="like">
+                      <div class="icon">
+                        <i class="fa fa-heart" style="color: lightgray"></i>
+                      </div>
+                    </div>
+                <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  var rating = function(){
+    $.ajax({
+      url: "/rates",
+      type: "post",
+      data: {point: $(this).val(), book_id: $("#book_id").text()},
+      success: function(res){
+        $("#avg_point").html(res.point)
+      }
+    })
+  }
+  $(document).ready(function(){
+
+    $("#like").on("click", function(){
+      $.ajax({
+        url: "/likes",
+        type: "post",
+        data: {book_id: $("#book_id").text()}
+      })
+    })
+
+    $("#unlike").on("click", function(){
+      $.ajax({
+        url: "/likes/" + $("#book_id").text(),
+        type: "delete"
+      })
+    })
+
+    var stars = $(".stars");
+    for(var i = 0; i < stars.length; i++){
+      $("#"+stars[i].id).bind('click',rating)
+    }
+  });
+</script>

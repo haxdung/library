@@ -1,0 +1,13 @@
+$("#react").html("<div class=\"pull-right\" id=\"like\">\n" +
+    "                    <div class=\"icon\">\n" +
+    "                      <i class=\"fa fa-heart\" style=\"color: lightgray\"></i>\n" +
+    "                    </div>\n" +
+    "                  </div>")
+$("#like").on("click", function(){
+    $.ajax({
+        url: "/likes",
+        type: "post",
+        data: {book_id: $("#book_id").text()}
+    })
+})
+$("#like_count").html(<%= @book.likes.count %>)

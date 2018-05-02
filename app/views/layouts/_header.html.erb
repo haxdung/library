@@ -1,0 +1,38 @@
+<div class="header">
+  <!-- Start intro section -->
+  <div id="intro" class="section-intro">
+    <div class="logo-menu">
+      <nav class="navbar navbar-default" style="opacity: 1;margin-bottom: 0">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="<%= root_path %>">Library</a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <% if logged_in? %>
+            <li>
+              <%= link_to logout_path,  method: :delete do %>
+                  <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> <%= t "views.layouts.logout" %>
+              <% end %>
+            </li>
+            <% else %>
+            <li>
+              <%= link_to login_path do %>
+                <i class="fa fa-sign-in fa-2x" aria-hidden="true"></i>Login
+              <% end %>
+            </li>
+            <% end %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                 aria-expanded="false" id="language"><i class="fa fa-language fa-2x" aria-hidden="true"></i> <%= t "views.layouts.header.language" %><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li id="en" ><%= link_to t("views.layouts.header.en"), locale:"en" %></li>
+                <li id="vi" ><%= link_to t("views.layouts.header.vi"), locale:"vi" %></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+<%= render "layouts/form_login" %>
